@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jensen Portfolio - Working Version</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+        }
+        h1 { font-size: 3em; margin-bottom: 20px; }
+        p { font-size: 1.2em; margin-bottom: 30px; }
+        .btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); }
+        .status {
+            background: #4ecdc4;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status">✅ Server is Working!</div>
+        <h1>Jensen Omega</h1>
+        <h2>Software Developer Portfolio</h2>
+        <p>Your React portfolio is being set up. This is a working HTML version to confirm the server is running properly.</p>
+        
+        <button class="btn" onclick="testJS()">Test JavaScript</button>
+        <button class="btn" onclick="window.location.reload()">Refresh Page</button>
+        
+        <div style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+            <p>🌐 Server: http://localhost:5173/</p>
+            <p>🔧 Status: Development Server Active</p>
+        </div>
+    </div>
+
+    <script>
+        function testJS() {
+            alert('🎉 JavaScript is working perfectly!');
+            console.log('JavaScript test successful');
+        }
+        
+        // Auto-test on load
+        console.log('✅ Page loaded successfully');
+        console.log('✅ JavaScript is running');
+        
+        // Add some animation
+        document.querySelector('.container').style.animation = 'fadeIn 1s ease-in';
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
