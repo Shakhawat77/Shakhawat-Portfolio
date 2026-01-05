@@ -21,9 +21,7 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <button className="px-8 py-3 bg-primary text-white font-semibold shadow-lg hover:bg-primary-hover transform hover:-translate-y-1 transition-all duration-200">
-              Got a project?
-            </button>
+            
             <button className="px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-200 font-semibold hover:border-primary hover:text-primary dark:hover:text-primary dark:hover:border-primary transition-all duration-200">
               My resume
             </button>
@@ -56,7 +54,7 @@ const Hero = () => {
             <img
               alt="MD SHAKHAWAT"
               className="w-full h-full object-cover"
-              src="https://ibb.co.com/hRD7MhdM"
+              src="https://i.ibb.co.com/s9F49kZK/Whats-App-Image-2026-01-05-at-7-08-19-PM.jpg"
             />
           </div>
         </div>

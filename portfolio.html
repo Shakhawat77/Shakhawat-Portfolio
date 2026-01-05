@@ -38,17 +38,54 @@
         };
     </script>
     <style>
-        body {
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
             font-family: 'Poppins', sans-serif;
         }
+        
+        /* Container Fix */
+        .container-fixed {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .container-fixed {
+                padding: 0 1.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .container-fixed {
+                padding: 0 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .container-fixed {
+                padding: 0 2.5rem;
+            }
+        }
+        
+        /* Animations */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
+        
         .floating-arrow {
             animation: float 4s ease-in-out infinite;
         }
+        
         .floating-arrow-delayed {
             animation: float 4s ease-in-out infinite 2s;
         }
@@ -116,14 +153,109 @@
             animation: handshake 2s ease-in-out infinite;
         }
         
-        /* Hover effects */
-        .project-card:hover .ticket-animation {
-            animation-duration: 1.5s;
+        /* Enhanced Animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         
-        .project-card:hover .job-pulse {
-            animation-duration: 1s;
+        @keyframes fadeInLeft {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
+        
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes slideInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+            40%, 43% { transform: translateY(-10px); }
+            70% { transform: translateY(-5px); }
+            90% { transform: translateY(-2px); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+        
+        .animate-slide-in-down {
+            animation: slideInDown 0.6s ease-out forwards;
+        }
+        
+        .animate-pulse-custom {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .animate-bounce-custom {
+            animation: bounce 2s infinite;
+        }
+        
+        .shimmer-effect {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Hover Animations */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(255, 111, 89, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Stagger Animation Delays */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
         
         /* Hero Social Links Animations */
         @keyframes socialFloat {
@@ -168,45 +300,56 @@
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300 min-h-screen flex flex-col">
 
 <!-- Navigation -->
-<nav class="w-full py-6 px-6 md:px-12 lg:px-24 flex justify-between items-center z-50 absolute top-0 left-0 bg-transparent">
-    <div class="text-2xl font-bold tracking-wide dark:text-white text-gray-900">
-        Md Shakhawat Hossain
-    </div>
-    <div class="hidden md:flex space-x-8 text-sm font-medium">
-        <a class="text-primary hover:text-primary-hover transition-colors" href="#">Home</a>
-        <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#about">About</a>
-        <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#skills">Skills</a>
-        <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#projects">Projects</a>
-        <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#contact">Contact</a>
-    </div>
-    <button class="md:hidden text-gray-600 dark:text-gray-300 focus:outline-none" onclick="toggleMenu()">
-        <span id="menu-icon" class="text-2xl">☰</span>
-    </button>
-    
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white dark:bg-background-dark shadow-lg md:hidden border-t border-gray-200 dark:border-gray-700">
-        <div class="flex flex-col space-y-4 p-6">
-            <a class="text-primary hover:text-primary-hover transition-colors" href="#" onclick="closeMobileMenu()">Home</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#about" onclick="closeMobileMenu()">About</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#skills" onclick="closeMobileMenu()">Skills</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#projects" onclick="closeMobileMenu()">Projects</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#contact" onclick="closeMobileMenu()">Contact</a>
+<nav class="w-full py-4 sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 z-50">
+    <div class="container-fixed flex justify-between items-center">
+        <div class="text-lg md:text-xl font-bold tracking-wide text-gray-900 dark:text-white flex items-center">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm mr-3">SH</div>
+            <span class="hidden sm:inline">Md Shakhawat Hossain</span>
+            <span class="sm:hidden">Shakhawat</span>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+            <a class="text-primary hover:text-primary-hover transition-colors duration-200" href="#">Home</a>
+            <a class="text-gray-700 dark:text-gray-200 hover:text-primary transition-colors duration-200" href="#about">About</a>
+            <a class="text-gray-700 dark:text-gray-200 hover:text-primary transition-colors duration-200" href="#skills">Skills</a>
+            <a class="text-gray-700 dark:text-gray-200 hover:text-primary transition-colors duration-200" href="#projects">Projects</a>
+            <a class="text-gray-700 dark:text-gray-200 hover:text-primary transition-colors duration-200" href="#education">Education</a>
+            <a class="text-gray-700 dark:text-gray-200 hover:text-primary transition-colors duration-200" href="#contact">Contact</a>
+        </div>
+        
+        <button class="md:hidden text-gray-800 dark:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" onclick="toggleMenu()">
+            <span id="menu-icon" class="text-xl">☰</span>
+        </button>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg md:hidden border-b border-gray-200 dark:border-gray-700">
+            <div class="container-fixed py-4">
+                <div class="flex flex-col space-y-2">
+                    <a class="text-primary py-2 px-4 rounded hover:bg-primary/10" href="#" onclick="closeMobileMenu()">Home</a>
+                    <a class="text-gray-700 dark:text-gray-200 py-2 px-4 rounded hover:bg-primary/10" href="#about" onclick="closeMobileMenu()">About</a>
+                    <a class="text-gray-700 dark:text-gray-200 py-2 px-4 rounded hover:bg-primary/10" href="#skills" onclick="closeMobileMenu()">Skills</a>
+                    <a class="text-gray-700 dark:text-gray-200 py-2 px-4 rounded hover:bg-primary/10" href="#projects" onclick="closeMobileMenu()">Projects</a>
+                    <a class="text-gray-700 dark:text-gray-200 py-2 px-4 rounded hover:bg-primary/10" href="#education" onclick="closeMobileMenu()">Education</a>
+                    <a class="text-gray-700 dark:text-gray-200 py-2 px-4 rounded hover:bg-primary/10" href="#contact" onclick="closeMobileMenu()">Contact</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
 
 <!-- Hero Section -->
-<main class="flex-grow flex items-center justify-center relative overflow-hidden pt-32 pb-20 lg:pt-0 min-h-screen">
+<main class="flex-grow flex items-center justify-center relative overflow-hidden py-16 min-h-screen">
     <div class="absolute inset-0 bg-hero-gradient z-0 pointer-events-none"></div>
     
-    <div class="container mx-auto px-6 md:px-12 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 h-full">
-        <div class="space-y-6 lg:space-y-8">
+    <div class="container-fixed grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        <!-- Left Content -->
+        <div class="space-y-6 text-center lg:text-left">
             <div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-2 flex items-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center lg:justify-start">
                     Hello
-                    <span class="text-primary text-6xl leading-none ml-1 mb-2">.</span>
+                    <span class="text-primary text-6xl leading-none ml-2 mb-2">.</span>
                 </h2>
-                <div class="flex items-center space-x-4 mb-4">
+                <div class="flex items-center justify-center lg:justify-start space-x-4 mb-4">
                     <div class="h-1 w-16 bg-primary rounded-full"></div>
                     <h3 class="text-2xl md:text-3xl font-light text-gray-600 dark:text-gray-300">I'm Shakhawat</h3>
                 </div>
@@ -215,17 +358,19 @@
                 </h1>
             </div>
             
-            <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                <button class="px-8 py-3 bg-primary text-white font-semibold shadow-lg hover:bg-primary-hover transform hover:-translate-y-1 transition-all duration-200">
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 justify-center lg:justify-start">
+                <button class="px-8 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-hover transform hover:-translate-y-1 transition-all duration-200">
                     Got a project?
                 </button>
-                <a href="https://www.canva.com/design/DAFwH9xhl3M/_m7ItpeAMt9iOCeeDZncTA/view" target="_blank" class="px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-200 font-semibold hover:border-primary hover:text-primary dark:hover:text-primary dark:hover:border-primary transition-all duration-200 inline-block text-center">
+                <a href="https://www.canva.com/design/DAFwH9xhl3M/_m7ItpeAMt9iOCeeDZncTA/view" target="_blank" 
+                   class="px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-200 font-semibold rounded-lg hover:border-primary hover:text-primary transition-all duration-200 text-center">
                     My resume
                 </a>
             </div>
             
-            <!-- Social Links with Animations -->
-            <div class="flex items-center gap-6 pt-8">
+            <!-- Social Links -->
+            <div class="flex items-center justify-center lg:justify-start gap-6 pt-6">
                 <div class="flex items-center gap-4">
                     <div class="h-px w-12 bg-gray-300 dark:bg-gray-600"></div>
                     <span class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Follow me</span>
@@ -233,15 +378,15 @@
                 
                 <div class="flex gap-4">
                     <a href="https://github.com/Shakhawat77" target="_blank" 
-                       class="social-link social-float group relative p-3 bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 rounded-xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-600">
-                        <i class="devicon-github-original text-2xl text-white group-hover:text-primary transition-colors duration-300"></i>
+                       class="social-link social-float group relative p-3 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-lg">
+                        <i class="devicon-github-original text-2xl text-white group-hover:text-primary transition-colors"></i>
                         <div class="absolute -top-2 -right-2 w-4 h-4 bg-green-500 rounded-full animate-ping"></div>
                         <div class="absolute -top-2 -right-2 w-4 h-4 bg-green-500 rounded-full"></div>
                     </a>
                     
                     <a href="https://www.linkedin.com/in/shoad-shakhawat/" target="_blank" 
-                       class="social-link social-float-delayed group relative p-3 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 rounded-xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-600">
-                        <i class="devicon-linkedin-plain text-2xl text-white group-hover:text-yellow-300 transition-colors duration-300"></i>
+                       class="social-link social-float-delayed group relative p-3 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg">
+                        <i class="devicon-linkedin-plain text-2xl text-white group-hover:text-yellow-300 transition-colors"></i>
                         <div class="absolute -top-2 -right-2 w-4 h-4 bg-blue-400 rounded-full animate-ping"></div>
                         <div class="absolute -top-2 -right-2 w-4 h-4 bg-blue-400 rounded-full"></div>
                     </a>
@@ -249,26 +394,30 @@
             </div>
         </div>
 
-        <div class="relative flex justify-center items-center h-full min-h-[400px] lg:min-h-[600px]">
-            <div class="absolute top-1/4 left-0 lg:-left-8 floating-arrow opacity-20 dark:opacity-40">
+        <!-- Right Content - Profile Image -->
+        <div class="relative flex justify-center items-center min-h-[400px]">
+            <!-- Floating Arrows -->
+            <div class="absolute top-1/4 left-0 floating-arrow opacity-20">
                 <svg fill="none" height="60" stroke="#FF6F59" stroke-width="1" viewBox="0 0 50 50" width="60">
                     <path d="M40 10 L15 25 L40 40"></path>
-                    <path d="M30 10 L5 25 L30 40" opacity="0.5"></path>
                 </svg>
             </div>
             
-            <div class="absolute bottom-1/4 right-0 lg:-right-8 floating-arrow-delayed opacity-20 dark:opacity-40">
+            <div class="absolute bottom-1/4 right-0 floating-arrow-delayed opacity-20">
                 <svg fill="none" height="60" stroke="#FF6F59" stroke-width="1" viewBox="0 0 50 50" width="60">
                     <path d="M10 10 L35 25 L10 40"></path>
-                    <path d="M20 10 L45 25 L20 40" opacity="0.5"></path>
                 </svg>
             </div>
 
-            <div class="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full border-2 border-primary/30 dark:border-primary/50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
-            <div class="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] rounded-full border-4 border-primary/20 dark:border-primary/40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
+            <!-- Animated Circles -->
+            <div class="absolute w-[400px] h-[400px] rounded-full border-2 border-primary/30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute w-[380px] h-[380px] rounded-full border-4 border-primary/20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
             
-            <div class="relative z-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-4 border-gray-200 dark:border-gray-800 shadow-2xl">
-                <img alt="Md Shakhawat Hossain Portrait" class="w-full h-full object-cover" src="https://i.ibb.co/hRD7MhD/profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face&auto=format&q=80'">
+            <!-- Profile Image -->
+            <div class="relative z-10 w-80 h-80 rounded-full overflow-hidden border-4 border-gray-200 dark:border-gray-800 shadow-2xl">
+                <img alt="Md Shakhawat Hossain Portrait" class="w-full h-full object-cover" 
+                     src="https://i.ibb.co.com/1f8vnhXn/Whats-App-Image-2026-01-05-at-7-08-19-PM.jpg" 
+                     onerror="this.src='https://i.ibb.co.com/1f8vnhXn/Whats-App-Image-2026-01-05-at-7-08-19-PM.jpg'">
             </div>
         </div>
     </div>
@@ -276,14 +425,14 @@
 
 <!-- About Section -->
 <section class="py-32 bg-white dark:bg-surface-dark transition-colors duration-300 relative z-10" id="about">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
-        <div class="flex flex-col items-center mb-24">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">About Me</h2>
-            <div class="h-12 w-1 bg-primary rounded-full"></div>
+    <div class="container-fixed">
+        <div class="flex flex-col items-center mb-16 animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">About Me</h2>
+            <div class="h-12 w-1 bg-primary rounded-full animate-pulse-custom"></div>
         </div>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="space-y-8">
+            <div class="space-y-8 animate-fade-in-left">
                 <h3 class="text-3xl font-bold text-gray-900 dark:text-white">Passionate Developer</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
                     I am a software developer with a strong foundation in building responsive and accessible web applications. My journey in tech is driven by a curiosity to understand how things work and a desire to create meaningful digital experiences.
@@ -293,24 +442,24 @@
                 </p>
             </div>
             
-            <div class="bg-gray-50 dark:bg-background-dark p-10 rounded-lg border border-gray-200 dark:border-gray-800 shadow-lg">
+            <div class="bg-gray-50 dark:bg-background-dark p-10 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg hover-lift animate-fade-in-right">
                 <div class="space-y-8">
-                    <div class="flex items-start gap-5">
-                        <div class="p-3 bg-primary/10 rounded-lg text-primary flex-shrink-0">
-                            <span class="text-2xl">💻</span>
+                    <div class="flex items-start gap-5 animate-fade-in-up stagger-1">
+                        <div class="p-4 bg-primary/10 rounded-xl text-primary flex-shrink-0 animate-pulse-custom">
+                            <span class="text-3xl">💻</span>
                         </div>
                         <div>
-                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Clean Code</h4>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Clean Code</h4>
                             <p class="text-gray-600 dark:text-gray-400">Writing maintainable, scalable, and efficient code is my top priority for every project.</p>
                         </div>
                     </div>
                     
-                    <div class="flex items-start gap-5">
-                        <div class="p-3 bg-primary/10 rounded-lg text-primary flex-shrink-0">
-                            <span class="text-2xl">📱</span>
+                    <div class="flex items-start gap-5 animate-fade-in-up stagger-2">
+                        <div class="p-4 bg-primary/10 rounded-xl text-primary flex-shrink-0 animate-pulse-custom">
+                            <span class="text-3xl">📱</span>
                         </div>
                         <div>
-                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Responsive Design</h4>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Responsive Design</h4>
                             <p class="text-gray-600 dark:text-gray-400">Ensuring applications look and feel great on any device, from desktop to mobile.</p>
                         </div>
                     </div>
@@ -322,150 +471,217 @@
 
 <!-- Skills Section -->
 <section class="py-32 bg-gray-50 dark:bg-background-dark transition-colors duration-300 relative z-10" id="skills">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
-        <div class="flex flex-col items-center mb-24">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Skills & Technology</h2>
-            <div class="h-12 w-1 bg-primary rounded-full"></div>
+    <div class="container-fixed">
+        <div class="flex flex-col items-center mb-16 animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Skills & Technology</h2>
+            <div class="h-12 w-1 bg-primary rounded-full animate-pulse-custom"></div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div class="bg-white dark:bg-surface-dark p-8 rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-6 text-primary">
-                    <span class="material-symbols-outlined text-3xl">web</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white dark:bg-surface-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 hover-lift animate-fade-in-up stagger-1">
+                <div class="flex items-center gap-4 mb-6 text-primary">
+                    <span class="material-symbols-outlined text-4xl animate-pulse-custom">web</span>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">Frontend</h3>
                 </div>
-                <div class="flex flex-wrap gap-2.5">
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">HTML5</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">CSS3</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">JavaScript</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">TailwindCSS</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">React</span>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">HTML5</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">CSS3</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">JavaScript</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">TailwindCSS</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">React</span>
                 </div>
             </div>
             
-            <div class="bg-white dark:bg-surface-dark p-8 rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-6 text-primary">
-                    <span class="material-symbols-outlined text-3xl">cloud</span>
+            <div class="bg-white dark:bg-surface-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 hover-lift animate-fade-in-up stagger-2">
+                <div class="flex items-center gap-4 mb-6 text-primary">
+                    <span class="material-symbols-outlined text-4xl animate-pulse-custom">cloud</span>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">Backend & Database</h3>
                 </div>
-                <div class="flex flex-wrap gap-2.5">
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Firebase</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Authentication</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Firestore</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Hosting</span>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Firebase</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Authentication</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Firestore</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Hosting</span>
                 </div>
             </div>
             
-            <div class="bg-white dark:bg-surface-dark p-8 rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-6 text-primary">
-                    <span class="material-symbols-outlined text-3xl">build</span>
+            <div class="bg-white dark:bg-surface-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 hover-lift animate-fade-in-up stagger-3">
+                <div class="flex items-center gap-4 mb-6 text-primary">
+                    <span class="material-symbols-outlined text-4xl animate-pulse-custom">build</span>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">Tools & Platforms</h3>
                 </div>
-                <div class="flex flex-wrap gap-2.5">
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Git</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">GitHub</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">VS Code</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Chrome DevTools</span>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Git</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">GitHub</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">VS Code</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Chrome DevTools</span>
                 </div>
             </div>
             
-            <div class="bg-white dark:bg-surface-dark p-8 rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-6 text-primary">
-                    <span class="material-symbols-outlined text-3xl">design_services</span>
+            <div class="bg-white dark:bg-surface-dark p-8 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 hover-lift animate-fade-in-up stagger-4">
+                <div class="flex items-center gap-4 mb-6 text-primary">
+                    <span class="material-symbols-outlined text-4xl animate-pulse-custom">design_services</span>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">Additional Skills</h3>
                 </div>
-                <div class="flex flex-wrap gap-2.5">
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Responsive Design</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">UI/UX Implementation</span>
-                    <span class="px-3 py-1 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full">Cross-Browser Compatibility</span>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Responsive Design</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">UI/UX Implementation</span>
+                    <span class="px-4 py-2 text-sm font-medium bg-gray-50 dark:bg-background-dark text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-default">Cross-Browser Compatibility</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<script>
+    // Mobile menu toggle
+    function toggleMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            icon.textContent = '✕';
+        } else {
+            mobileMenu.classList.add('hidden');
+            icon.textContent = '☰';
+        }
+    }
+    
+    // Close mobile menu
+    function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        
+        mobileMenu.classList.add('hidden');
+        icon.textContent = '☰';
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuButton = event.target.closest('button');
+        
+        if (!mobileMenu.contains(event.target) && !menuButton) {
+            closeMobileMenu();
+        }
+    });
+</script>
+
+</body>
+</html>
+
 <!-- Projects Section -->
 <section class="py-32 bg-white dark:bg-surface-dark transition-colors duration-300 relative z-10" id="projects">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
-        <div class="flex flex-col items-center mb-24">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Projects</h2>
+    <div class="container-fixed">
+        <div class="flex flex-col items-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Featured Projects</h2>
             <div class="h-12 w-1 bg-primary rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-400 text-lg text-center mt-6 max-w-2xl">
+                Here are some of my recent projects that showcase my skills in full-stack development, 
+                modern web technologies, and user experience design.
+            </p>
         </div>
         
-        <div class="space-y-40">
-            <!-- Online Ticket Booking Platform -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 space-y-8">
-                    <h3 class="text-3xl font-bold text-gray-900 dark:text-white">Online Ticket Booking Platform</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">MongoDB</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">Express</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">React</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">Node.js</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">MERN Stack</span>
+        <div class="space-y-32">
+            <!-- Project 1: Online Ticket Booking Platform -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Project Info -->
+                <div class="space-y-6 lg:pr-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm">01</div>
+                        <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">Online Ticket Booking Platform</h3>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                        A full-stack MERN application that allows users to discover, book, and manage travel tickets such as Bus, Train, Launch, and Plane. The platform supports three distinct roles — User, Vendor, and Admin — each with role-based dashboards and permissions. Features authentication, authorization, payment integration, and production deployment.
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">MongoDB</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full">Express</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-cyan-100 dark:bg-cyan-900/30 text-cyan-800 dark:text-cyan-300 rounded-full">React</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full">Node.js</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full">MERN Stack</span>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                        A comprehensive full-stack MERN application enabling users to discover, book, and manage travel tickets 
+                        for Bus, Train, Launch, and Plane services. The platform features three distinct user roles with 
+                        specialized dashboards, secure authentication, payment integration, and production-ready deployment.
                     </p>
-                    <div class="flex items-center gap-6 pt-2">
-                        <a href="https://github.com/Shakhawat77/Ticket-Booking-Frontend" target="_blank" class="px-6 py-3 bg-primary text-white font-semibold rounded shadow-lg hover:bg-primary-hover transition-colors">View Github</a>
-                        <a class="flex items-center gap-2 text-gray-900 dark:text-white font-semibold hover:text-primary dark:hover:text-primary transition-colors group" href="https://vermillion-donut-9dceed.netlify.app/" target="_blank">
-                            View Live Site <span class="text-lg">↗</span>
+                    
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-gray-900 dark:text-white">Key Features:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 ml-4">
+                            <li>• Multi-transport booking system</li>
+                            <li>• Role-based access control (User, Vendor, Admin)</li>
+                            <li>• Secure payment integration</li>
+                            <li>• Real-time booking management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <a href="https://github.com/Shakhawat77/Ticket-Booking-Frontend" target="_blank" 
+                           class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-hover transform hover:-translate-y-1 transition-all duration-200">
+                            <i class="devicon-github-original mr-2"></i>
+                            View Code
+                        </a>
+                        <a href="https://vermillion-donut-9dceed.netlify.app/" target="_blank" 
+                           class="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-200">
+                            View Live Demo
+                            <span class="ml-2 text-lg">↗</span>
                         </a>
                     </div>
                 </div>
-                <div class="order-1 lg:order-2">
-                    <div class="relative group project-card">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                        <div class="relative bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 border border-gray-800 rounded-lg overflow-hidden h-[360px] flex items-center justify-center">
-                            <!-- Animated Ticket Booking Interface -->
-                            <div class="w-full h-full relative overflow-hidden">
-                                <!-- Background Pattern -->
-                                <div class="absolute inset-0 opacity-10">
-                                    <div class="grid grid-cols-8 grid-rows-6 h-full w-full gap-1 p-4">
-                                        <div class="bg-white rounded opacity-30"></div>
-                                        <div class="bg-white rounded opacity-20"></div>
-                                        <div class="bg-white rounded opacity-40"></div>
-                                        <div class="bg-white rounded opacity-25"></div>
-                                        <div class="bg-white rounded opacity-35"></div>
-                                        <div class="bg-white rounded opacity-30"></div>
-                                        <div class="bg-white rounded opacity-20"></div>
-                                        <div class="bg-white rounded opacity-40"></div>
-                                    </div>
+                
+                <!-- Project Visual -->
+                <div class="relative group project-card">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 rounded-xl overflow-hidden h-[400px] flex items-center justify-center shadow-2xl">
+                        <!-- Animated Ticket Booking Interface -->
+                        <div class="w-full h-full relative overflow-hidden">
+                            <!-- Background Pattern -->
+                            <div class="absolute inset-0 opacity-10">
+                                <div class="grid grid-cols-8 grid-rows-6 h-full w-full gap-1 p-4">
+                                    <div class="bg-white rounded opacity-30"></div>
+                                    <div class="bg-white rounded opacity-20"></div>
+                                    <div class="bg-white rounded opacity-40"></div>
+                                    <div class="bg-white rounded opacity-25"></div>
+                                    <div class="bg-white rounded opacity-35"></div>
+                                    <div class="bg-white rounded opacity-30"></div>
+                                    <div class="bg-white rounded opacity-20"></div>
+                                    <div class="bg-white rounded opacity-40"></div>
                                 </div>
-                                
-                                <!-- Animated Elements -->
-                                <div class="absolute top-8 left-8 ticket-animation">
-                                    <div class="bg-white rounded-lg p-3 shadow-lg">
-                                        <div class="text-2xl">🎫</div>
-                                    </div>
+                            </div>
+                            
+                            <!-- Animated Elements -->
+                            <div class="absolute top-8 left-8 ticket-animation">
+                                <div class="bg-white rounded-lg p-3 shadow-lg">
+                                    <div class="text-2xl">🎫</div>
                                 </div>
-                                
-                                <div class="absolute top-16 right-12 train-animation">
-                                    <div class="text-3xl">🚂</div>
+                            </div>
+                            
+                            <div class="absolute top-16 right-12 train-animation">
+                                <div class="text-3xl">🚂</div>
+                            </div>
+                            
+                            <div class="absolute bottom-20 left-12 plane-animation">
+                                <div class="text-2xl">✈️</div>
+                            </div>
+                            
+                            <div class="absolute bottom-8 right-8 ticket-animation" style="animation-delay: 1s;">
+                                <div class="bg-white rounded-lg p-2 shadow-lg">
+                                    <div class="text-xl">🚌</div>
                                 </div>
-                                
-                                <div class="absolute bottom-20 left-12 plane-animation">
-                                    <div class="text-2xl">✈️</div>
-                                </div>
-                                
-                                <div class="absolute bottom-8 right-8 ticket-animation" style="animation-delay: 1s;">
-                                    <div class="bg-white rounded-lg p-2 shadow-lg">
-                                        <div class="text-xl">🚌</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Central Content -->
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="text-center text-white">
-                                        <div class="text-6xl mb-4 animate-pulse">🎫</div>
-                                        <h4 class="text-2xl font-bold mb-2">Ticket Booking</h4>
-                                        <p class="text-lg opacity-90">Multi-Transport Platform</p>
-                                        <div class="flex justify-center gap-2 mt-4">
-                                            <div class="w-2 h-2 bg-white rounded-full animate-bounce"></div>
-                                            <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
-                                            <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
-                                        </div>
+                            </div>
+                            
+                            <!-- Central Content -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center text-white">
+                                    <div class="text-6xl mb-4 animate-pulse">🎫</div>
+                                    <h4 class="text-2xl font-bold mb-2">Ticket Booking</h4>
+                                    <p class="text-lg opacity-90">Multi-Transport Platform</p>
+                                    <div class="flex justify-center gap-2 mt-4">
+                                        <div class="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                                        <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                                        <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -474,11 +690,12 @@
                 </div>
             </div>
 
-            <!-- Freelance Market -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-1 relative group project-card">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative bg-gradient-to-br from-green-500 via-emerald-600 to-blue-600 border border-gray-800 rounded-lg overflow-hidden h-[360px] flex items-center justify-center">
+            <!-- Project 2: Freelance Market -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Project Visual -->
+                <div class="relative group project-card lg:order-1">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-gradient-to-br from-green-500 via-emerald-600 to-blue-600 rounded-xl overflow-hidden h-[400px] flex items-center justify-center shadow-2xl">
                         <!-- Animated Freelance Market Interface -->
                         <div class="w-full h-full relative overflow-hidden">
                             <!-- Background Pattern -->
@@ -534,38 +751,73 @@
                         </div>
                     </div>
                 </div>
-                <div class="order-2 space-y-8">
-                    <h3 class="text-3xl font-bold text-gray-900 dark:text-white">Freelance Market</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">MongoDB</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">Express</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">React</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">Node.js</span>
-                        <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wide bg-gray-200 dark:bg-background-dark text-gray-700 dark:text-gray-300 rounded-full">Payment Integration</span>
+                
+                <!-- Project Info -->
+                <div class="space-y-6 lg:pl-8 lg:order-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm">02</div>
+                        <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">Freelance Market</h3>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                        A full-stack Freelance Job Marketplace built with MERN stack. Users can browse, post, accept, and manage freelance jobs. Features include authentication, role-based features, dark/light theme toggle, job management dashboards, and payment integration support.
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">MongoDB</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full">Express</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-cyan-100 dark:bg-cyan-900/30 text-cyan-800 dark:text-cyan-300 rounded-full">React</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full">Node.js</span>
+                        <span class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide bg-pink-100 dark:bg-pink-900/30 text-pink-800 dark:text-pink-300 rounded-full">Payment Integration</span>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                        A comprehensive freelance job marketplace built with the MERN stack, connecting freelancers with clients. 
+                        The platform enables users to browse, post, accept, and manage freelance opportunities with integrated 
+                        payment processing and real-time communication features.
                     </p>
-                    <div class="flex flex-col gap-4">
-                        <div class="flex items-center gap-6">
-                            <a href="https://github.com/Shakhawat77/B12A10-Shakhawat-client" target="_blank" class="px-6 py-3 bg-primary text-white font-semibold rounded shadow-lg hover:bg-primary-hover transition-colors">Client Repo</a>
-                            <a href="https://github.com/Shakhawat77/B12A10-Shakhawat-server" target="_blank" class="px-6 py-3 border border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors">Server Repo</a>
-                        </div>
-                        <a class="flex items-center gap-2 text-gray-900 dark:text-white font-semibold hover:text-primary dark:hover:text-primary transition-colors group" href="https://sage-wisp-b02d66.netlify.app/" target="_blank">
-                            View Live Site <span class="text-lg">↗</span>
+                    
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-gray-900 dark:text-white">Key Features:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 ml-4">
+                            <li>• Job posting and bidding system</li>
+                            <li>• User authentication and profiles</li>
+                            <li>• Dark/light theme toggle</li>
+                            <li>• Payment integration support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <a href="https://github.com/Shakhawat77/B12A10-Shakhawat-client" target="_blank" 
+                           class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-hover transform hover:-translate-y-1 transition-all duration-200 hover-glow">
+                            <i class="devicon-github-original mr-2"></i>
+                            View Code
+                        </a>
+                        <a href="https://sage-wisp-b02d66.netlify.app/" target="_blank" 
+                           class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 hover-lift">
+                            View Live Demo
+                            <span class="ml-2 text-lg">↗</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Call to Action -->
+        <div class="text-center mt-20 pt-16 border-t border-gray-200 dark:border-gray-700">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Interested in working together?</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                I'm always open to discussing new opportunities and exciting projects. 
+                Let's create something amazing together!
+            </p>
+            <a href="#contact" class="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-hover transform hover:-translate-y-1 transition-all duration-200">
+                Get In Touch
+                <span class="ml-2">→</span>
+            </a>
+        </div>
     </div>
 </section>
-
 <!-- Academic Qualifications Section -->
 <section class="py-32 bg-gray-50 dark:bg-background-dark transition-colors duration-300 relative z-10" id="education">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
-        <div class="flex flex-col items-center mb-24">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Academic Qualifications</h2>
+    <div class="container-fixed">
+        <div class="flex flex-col items-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Academic Qualifications</h2>
             <div class="h-12 w-1 bg-primary rounded-full"></div>
         </div>
         
@@ -695,12 +947,11 @@
         </div>
     </div>
 </section>
-
 <!-- Contact Section -->
-<section class="py-32 bg-gray-50 dark:bg-background-dark transition-colors duration-300 relative z-10" id="contact">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
-        <div class="flex flex-col items-center mb-24">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Contact Me</h2>
+<section class="py-32 bg-white dark:bg-surface-dark transition-colors duration-300 relative z-10" id="contact">
+    <div class="container-fixed">
+        <div class="flex flex-col items-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Contact Me</h2>
             <div class="h-12 w-1 bg-primary rounded-full"></div>
         </div>
         
@@ -765,7 +1016,7 @@
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-background-dark p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800">
+            <div class="bg-gray-50 dark:bg-background-dark p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800">
                 <form class="space-y-6" onsubmit="handleSubmit(event)">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
@@ -796,13 +1047,12 @@
         </div>
     </div>
 </section>
-
 <!-- Footer -->
-<footer class="bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 py-16 transition-colors duration-300">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
+<footer class="bg-gray-50 dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 py-16 transition-colors duration-300">
+    <div class="container-fixed">
         <div class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0">
             <div class="text-center md:text-left space-y-3">
-                <div class="text-2xl font-bold tracking-wide dark:text-white text-gray-900 flex items-center justify-center md:justify-start gap-2">
+                <div class="text-xl md:text-2xl font-bold tracking-wide dark:text-white text-gray-900 flex items-center justify-center md:justify-start gap-2">
                     <div class="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">SH</div>
                     Md Shakhawat Hossain
                 </div>
@@ -814,7 +1064,9 @@
             <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4">
                 <a class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Home</a>
                 <a class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#about">About</a>
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#skills">Skills</a>
                 <a class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#projects">Projects</a>
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#education">Education</a>
                 <a class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#contact">Contact</a>
             </nav>
         </div>
@@ -972,12 +1224,53 @@
         });
     }
     
+    // Navbar scroll effects and active link highlighting
+    function initNavbarEffects() {
+        const navbar = document.querySelector('nav');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        const sections = document.querySelectorAll('section[id]');
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+                if (document.documentElement.classList.contains('dark')) {
+                    navbar.style.background = 'rgba(13, 17, 23, 0.95)';
+                }
+            } else {
+                navbar.style.background = '';
+                navbar.style.backdropFilter = '';
+            }
+            
+            // Active link highlighting
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary');
+                link.classList.add('text-gray-700', 'dark:text-gray-200');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.remove('text-gray-700', 'dark:text-gray-200');
+                    link.classList.add('text-primary');
+                }
+            });
+        });
+    }
+    
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
         initTheme();
         initSmoothScrolling();
         initScrollAnimations();
         initMobileMenuHandlers();
+        initNavbarEffects();
         console.log('✅ Complete portfolio loaded successfully!');
     });
 </script>

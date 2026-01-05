@@ -364,8 +364,8 @@
                     Got a project?
                 </button>
                 <a href="https://www.canva.com/design/DAFwH9xhl3M/_m7ItpeAMt9iOCeeDZncTA/view" target="_blank" 
-                   class="px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-200 font-semibold rounded-lg hover:border-primary hover:text-primary transition-all duration-200 text-center">
-                    My resume
+                   class="px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-800 dark:text-gray-200 font-semibold rounded-lg hover:border-primary hover:text-primary transition-all duration-200 text-center" onclick="downloadResume(event)">
+                    📄 Download Resume
                 </a>
             </div>
             
@@ -1118,6 +1118,25 @@
             icon.textContent = '🌙';
             localStorage.setItem('theme', 'light');
         }
+    }
+    
+    // Resume download function
+    function downloadResume(event) {
+        event.preventDefault();
+        
+        // Create a temporary link element
+        const link = document.createElement('a');
+        link.href = 'https://www.canva.com/design/DAFwH9xhl3M/_m7ItpeAMt9iOCeeDZncTA/view?utm_content=DAFwH9xhl3M&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink';
+        link.download = 'Md_Shakhawat_Hossain_Resume.pdf';
+        link.target = '_blank';
+        
+        // Append to body, click, and remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show a message to user
+        alert('Resume download initiated! If the download doesn\'t start automatically, please click "Download" on the Canva page that opens.');
     }
     
     // Initialize theme
